@@ -2,6 +2,7 @@ package io.anuke.mindustry.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.reflect.ClassReflection;
 import io.anuke.mindustry.core.GameState.State;
 import io.anuke.mindustry.net.Net;
 import io.anuke.mindustry.net.NetEvents;
@@ -13,6 +14,8 @@ import io.anuke.ucore.core.KeyBinds;
 import io.anuke.ucore.core.Timers;
 import io.anuke.ucore.scene.utils.Cursors;
 import io.anuke.ucore.util.Mathf;
+
+import io.anuke.mindustry.ui.fragments.ChatFragment;//OG
 
 import static io.anuke.mindustry.Vars.*;
 
@@ -156,6 +159,39 @@ public class DesktopInput extends InputHandler{
 				Cursors.setHand();
 			else
 				Cursors.restoreCursor();
+		}
+
+		if(Inputs.keyTap("info_og")){
+			String modSpeakerName = "DEBUG MOD";
+			Tile tile = world.tile(getBlockX(), getBlockY());
+			
+			String infoText = "Selected Tile Position: (" + getBlockX() + ", " + getBlockY() + ")"
+				// + "\nTile: " + tile
+				 + "\nWorld Seed: " + world.getSeed()
+				 + "\nID: " + tile.id()
+				 + "\nFloor: " + tile.floor() + "(" + tile.getFloorID() + ")"
+				 + "\nBlock : " + tile.block() + "(" + tile.getWallID() + ")"
+				 + "\nRotation: " + tile.getRotation()
+				// + "\nBreak Time: " + tile.getBreakTime()
+				// + "\nDump: " + tile.getDump()
+				 + "\nPassable: " + tile.passable()
+				 + "\nSolid: " + tile.solid()
+				 + "\nBreakable: " + tile.breakable()
+				 + "\nTarget: " + tile.target().block()
+				// + "\n"
+				;
+			
+			try{
+				infoText += "\nLinked Tile: " + String.valueOf(tile.getLinked().block());
+			} catch (NullPointerException e) {
+			}
+			
+			try{
+				infoText += "\nEntity: " + ClassReflection.getSimpleName(tile.entity().getClass());
+			} catch (NullPointerException e) {
+			}
+			
+			ui.chatfrag.addMessage(infoText, modSpeakerName);
 		}
 
 	}

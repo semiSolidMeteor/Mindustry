@@ -35,7 +35,8 @@ public class DefaultKeybinds {
                 "weapon_3", Input.NUM_3,
                 "weapon_4", Input.NUM_4,
                 "weapon_5", Input.NUM_5,
-                "weapon_6", Input.NUM_6
+                "weapon_6", Input.NUM_6,
+				"info_og", Input.MOUSE_MIDDLE //OG
         );
 
         KeyBinds.defaults(
@@ -65,7 +66,8 @@ public class DefaultKeybinds {
                 "weapon_3", Input.NUM_3,
                 "weapon_4", Input.NUM_4,
                 "weapon_5", Input.NUM_5,
-                "weapon_6", Input.NUM_6
+                "weapon_6", Input.NUM_6,
+				"info_og", Input.MOUSE_MIDDLE //OG
         );
     }
 }
