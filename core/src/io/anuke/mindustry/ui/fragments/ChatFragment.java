@@ -26,7 +26,7 @@ import static io.anuke.ucore.core.Core.scene;
 import static io.anuke.ucore.core.Core.skin;
 
 public class ChatFragment extends Table implements Fragment{
-    private final static int messagesShown = 10;
+    private final static int messagesShown = 5;
     private final static int maxLength = 150;
     private Array<ChatMessage> messages = new Array<>();
     private float fadetime;
@@ -49,7 +49,7 @@ public class ChatFragment extends Table implements Fragment{
         setFillParent(true);
         font = Core.skin.getFont("default-font");
 
-        setVisible(() -> !state.is(State.menu) && Net.active());
+        setVisible(() -> !state.is(State.menu));
 
         //TODO put it in input?
         update(() -> {
@@ -107,12 +107,12 @@ public class ChatFragment extends Table implements Fragment{
 
         add(chatfield).padBottom(offsety).padLeft(offsetx).growX().padRight(offsetx).height(28);
 
-        if(Vars.mobile) {
+        if(Vars.android) {
             marginBottom(105f);
             marginRight(240f);
         }
 
-        if(Vars.mobile) {
+        if(Vars.android) {
             addImageButton("icon-arrow-right", 14 * 2, this::toggle).size(46f, 51f).visible(() -> chatOpen).pad(2f);
         }
     }
